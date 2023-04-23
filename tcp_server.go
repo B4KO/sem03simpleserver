@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/B4KO/is105sem03/mycrypt"
 	"io"
 	"log"
 	"net"
@@ -37,10 +38,11 @@ func main() {
 						return // fra for løkke
 					}
 					switch msg := string(buf[:n]); msg {
-  				        case "ping":
+					case "ping":
 						_, err = c.Write([]byte("pong"))
 					default:
-						_, err = c.Write(buf[:n])
+						decryptMessage := mycrypt.Krypter([]rune(msg), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+						_, err = c.Write([]byte(string(decryptMessage)))
 					}
 					if err != nil {
 						if err != io.EOF {
