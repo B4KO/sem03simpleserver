@@ -41,8 +41,9 @@ func main() {
 					case "ping":
 						_, err = c.Write([]byte("pong"))
 					default:
-						decryptMessage := mycrypt.Krypter([]rune(msg), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
-						_, err = c.Write([]byte(string(decryptMessage)))
+						decryptedMessage := mycrypt.Krypter([]rune(msg), mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+						log.Println("Dekrypter melding: ", string(decryptedMessage))
+						_, err = c.Write([]byte(string(decryptedMessage)))
 					}
 					if err != nil {
 						if err != io.EOF {
