@@ -46,8 +46,8 @@ func main() {
 
 					case "ping":
 						log.Println("Dekrypter melding: ", msg)
-						msg = string(mycrypt.Krypter([]rune(msg), mycrypt.ALF_SEM03, 4))
-						_, err = c.Write([]byte("pong"))
+						msg = string(mycrypt.Krypter([]rune("pong"), mycrypt.ALF_SEM03, 4))
+						_, err = c.Write([]byte(msg))
 
 					default:
 						log.Println("Dekrypter melding: ", msg)
